@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography | Gauhar Rustemkyzy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav-menu">
+        <a href="index.html">about me</a>
+        <a href="digital_garden.html">digital garden</a>
+        <a href="music.html">music</a>
+        <a href="multimedia.html">multimedia</a>
+        <a href="photography.html" style="text-decoration: underline; opacity: 1;">photography</a>
+    </nav>
+
+    <header class="header">
+        <h1 class="main-name">VISUAL DIARY</h1>
+        <div class="city">Parisian Moments</div>
+    </header>
+
+    <main class="photography-grid">
+        
+        <div class="gallery-item item-1"><img src="img/gallery1.jpg" alt="Gallery Photo 1"></div>
+        <div class="gallery-item item-2"><img src="img/gallery2.jpg" alt="Gallery Photo 2"></div>
+        <div class="gallery-item item-3"><img src="img/gallery3.jpg" alt="Gallery Photo 3"></div>
+        <div class="gallery-item item-4"><img src="img/gallery4.jpg" alt="Gallery Photo 4"></div>
+        <div class="gallery-item item-5"><img src="img/gallery5.jpg" alt="Gallery Photo 5"></div>
+        <div class="gallery-item item-6"><img src="img/gallery9.jpg" alt="Gallery Photo 6"></div>
+        <div class="gallery-item item-7"><img src="img/gallery7.jpg" alt="Gallery Photo 7"></div>
+        <div class="gallery-item item-8"><img src="img/gallery8.jpg" alt="Gallery Photo 8"></div>
+        
+    </main>
+
+    <div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<script>
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    // Проверка: выведет сообщение в консоль браузера (F12), если блоки найдены
+    if(cursor && follower) {
+        console.log("Курсор найден и готов к работе!");
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        // Используем прямое изменение стилей через координаты
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Шлейф будет следовать за основной точкой
+        follower.style.left = e.clientX + 'px';
+        follower.style.top = e.clientY + 'px';
+    });
+</script>
+</body>
+</html>

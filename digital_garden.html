@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Garden | Gauhar Rustemkyzy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav-menu">
+        <a href="index.html">about me</a>
+        <a href="digital_garden.html" style="text-decoration: underline; opacity: 1;">digital garden</a>
+        <a href="music.html">music</a>
+        <a href="multimedia.html">multimedia</a>
+        <a href="photography.html">photography</a>
+    </nav>
+
+    <header class="header">
+        <h1 class="main-name">DIGITAL GARDEN</h1>
+        <div class="city">Thoughts & Inspiration</div>
+    </header>
+
+    <main class="garden-container">
+        
+    <div class="garden-card note">
+        <p class="garden-text" id="daily-quote">"Загрузка вдохновения..."</p>
+        <span class="garden-date" id="current-date"></span>
+    </div>
+
+        <div class="garden-card">
+            <h3>Current Inspiration</h3>
+            <p>Parisian jazz cellars, the smell of vintage vinyl, and the way light hits the Seine at 6 PM.</p>
+        </div>
+
+        <div class="garden-card playlist-mini">
+            <h3>Mood of the month</h3>
+            <ul>
+                <li>• Sade - Smooth Operator</li>
+                <li>• Edith Piaf - Hymne à l'amour</li>
+                <li>• Erykah Badu - Rimshot</li>
+            </ul>
+        </div>
+
+        <div class="garden-card photo-note">
+            <img src="img/ground3.jpg" alt="Aesthetic">
+            <p>Details in the streets.</p>
+        </div>
+
+    </main>
+<script>
+    // 1. Установка даты
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    document.getElementById('current-date').innerText = day + '.' + month + '.' + year;
+
+    // 2. Список цитат (можешь добавлять свои сколько угодно)
+    const quotes = [
+        "L'art est la seule chose qui rend la vie plus intéressante que l'art.",
+        "Music is the divine way to tell beautiful, poetic things to the heart.",
+        "La vie est une fleur dont l'amour est le miel.",
+        "Каждое выступление — это новая история, рассказанная душой.",
+        "Paris est une fête — Париж это праздник, который всегда с тобой.",
+        "Art is not what you see, but what you make others see.",
+        "В музыке нет границ, только чувства."
+    ];
+
+    // 3. Логика смены цитаты раз в сутки
+    // Используем индекс дня года, чтобы цитата менялась только когда наступает новый день
+    const start = new Date(today.getFullYear(), 0, 0);
+    const diff = today - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+
+    // Выбираем цитату из списка по номеру дня
+    const quoteIndex = dayOfYear % quotes.length;
+    document.getElementById('daily-quote').innerText = '"' + quotes[quoteIndex] + '"';
+</script>
+
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<script>
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    // Проверка: выведет сообщение в консоль браузера (F12), если блоки найдены
+    if(cursor && follower) {
+        console.log("Курсор найден и готов к работе!");
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        // Используем прямое изменение стилей через координаты
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Шлейф будет следовать за основной точкой
+        follower.style.left = e.clientX + 'px';
+        follower.style.top = e.clientY + 'px';
+    });
+</script>
+
+</body>
+</html>

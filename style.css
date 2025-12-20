@@ -1,0 +1,562 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: #f3d1d3;
+    font-family: 'Courier New', Courier, monospace;
+    color: #ffffff;
+    padding: 20px 40px;
+}
+
+/* МЕНЮ */
+.nav-menu {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 15px;
+    opacity: 0.8;
+}
+
+/* ШАПКА */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.main-name {
+    font-size: 34px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.main-name span { font-size: 30px; display: block; }
+.city { font-size: 16px; }
+
+/* КОНТЕНТ: Увеличил первую колонку до 500px для больших фото */
+.content-grid {
+    display: grid;
+    grid-template-columns: 500px 1fr 380px; 
+    gap: 30px;
+    align-items: start;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* ФОТО: УВЕЛИЧЕННЫЙ РАЗМЕР */
+.photo-col { 
+    position: relative; 
+    height: 500px; /* Увеличил высоту зоны фото */
+}
+
+.card {
+    position: absolute;
+    width: 280px;  /* Было 180, стало 280 — теперь фото крупные */
+    height: 380px; /* Было 250, стало 380 */
+    border: 1px solid #fff;
+    background: #ccc;
+    box-shadow: 10px 10px 25px rgba(0,0,0,0.1); /* Добавил тень для объема */
+}
+
+.p1 { 
+    transform: rotate(-5deg); 
+    z-index: 2; 
+    left: 0;
+}
+
+.p2 { 
+    left: 200px; /* Сдвинул второе фото, чтобы они красиво перекрывались */
+    top: 40px; 
+    transform: rotate(5deg); 
+    z-index: 1; 
+}
+
+.card img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    filter: none; /* Качественное цветное изображение */
+    display: block;
+}
+
+/* ТЕКСТ */
+.text-col {
+    padding-top: 10px;
+}
+
+.prof-info { font-size: 18px; margin-bottom: 20px; line-height: 1.4; }
+.prof-info ul { list-style: none; margin-top: 5px; }
+.bio { font-size: 16px; line-height: 1.4; }
+
+/* КОНВЕРТ */
+.envelope {
+    position: relative;
+    background-color: #e8a7ad;
+    width: 100%;
+    aspect-ratio: 1.5/1;
+    padding: 25px 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.env-label { 
+    font-size: 13px; 
+    margin-bottom: 10px; 
+    position: relative; 
+    z-index: 10; 
+}
+
+.flap {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    clip-path: polygon(0 0, 50% 50%, 100% 0);
+    background: #f1b3b9;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    z-index: 1; 
+}
+
+.genre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    text-align: center;
+    font-size: 20px;
+    position: relative;
+    z-index: 10; 
+    margin-top: 25px;
+}
+
+.lover-sign {
+    position: absolute;
+    top: 52%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    font-family: 'Brush Script MT', cursive;
+    font-size: 22px;
+    color: #444;
+    z-index: 11; 
+}
+.social-link {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.social-link a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.social-link a:hover {
+    opacity: 1;
+}
+/* СТИЛИ ДЛЯ MUSIC.HTML */
+.music-container {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 40px auto;
+    align-items: center;
+}
+
+.track-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.track-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.track-no { font-size: 14px; opacity: 0.5; }
+.track-title { font-size: 20px; text-transform: uppercase; letter-spacing: 1px; }
+.track-sub { font-size: 13px; opacity: 0.7; font-style: italic; }
+
+/* Кастомизация стандартного плеера */
+audio {
+    width: 100%;
+    height: 30px;
+    filter: sepia(20%) hue-rotate(300deg) brightness(110%); /* Подгоняем под розовый цвет */
+    opacity: 0.8;
+}
+
+/* Виниловая пластинка (декор) */
+.music-visual {
+    display: flex;
+    justify-content: center;
+}
+
+.record-circle {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, #333 30%, #111 100%);
+    border-radius: 50%;
+    border: 10px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    animation: rotateRecord 10s linear infinite; /* Пластинка крутится! */
+}
+
+.record-label {
+    width: 100px;
+    height: 100px;
+    background-color: #e8a7ad;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 2px;
+    border: 2px solid #fff;
+}
+
+@keyframes rotateRecord {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+/* СТИЛИ ДЛЯ PHOTOGRAPHY.HTML */
+.photography-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Адаптивная сетка */
+    gap: 20px;
+    max-width: 1400px;
+    margin: 40px auto;
+}
+
+.gallery-item {
+    background-color: #f1b3b9; /* Заглушка, если нет фото */
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03); /* Увеличивается при наведении */
+    z-index: 10;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Фото полностью заполняет блок */
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img:hover {
+    transform: scale(1.05); /* Легкий зум при наведении на само фото */
+}
+
+/* Изменение размера для некоторых фото для эффекта коллажа */
+.item-1 { grid-column: span 2; grid-row: span 2; aspect-ratio: 1/1; } /* Крупное квадратное */
+.item-2 { aspect-ratio: 4/3; } /* Горизонтальное */
+.item-3 { aspect-ratio: 3/4; } /* Вертикальное */
+.item-4 { grid-row: span 2; aspect-ratio: 1/1.5; } /* Высокое */
+.item-5 { aspect-ratio: 16/9; } /* Широкое */
+.item-6 { grid-column: span 2; aspect-ratio: 2/1; } /* Очень широкое */
+.item-7 { aspect-ratio: 1/1; } /* Квадратное */
+.item-8 { aspect-ratio: 4/3; }
+
+/* Медиа-запросы для адаптивности */
+@media (max-width: 768px) {
+    .photography-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+    .item-1, .item-4, .item-6 { 
+        grid-column: span 1; 
+        grid-row: auto; 
+        aspect-ratio: 4/3; /* Делаем все более однородным */
+    }
+}
+/* СТИЛИ ДЛЯ MULTIMEDIA.HTML */
+.multimedia-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: 40px auto;
+}
+
+.video-card {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    aspect-ratio: 9 / 16; /* Вертикальный формат как в Reels */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    border-color: #fff;
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.video-placeholder video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.video-card:hover video {
+    opacity: 1;
+}
+
+.video-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: rgba(232, 167, 173, 0.8); /* Цвет нашего конверта */
+    padding: 5px 12px;
+    pointer-events: none;
+}
+/* СТИЛИ ДЛЯ DIGITAL GARDEN */
+.garden-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.garden-card {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+    padding: 25px;
+    width: 300px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.garden-card:hover {
+    transform: rotate(2deg) scale(1.02);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.garden-card.note {
+    background: #f1b3b9; /* Чуть другой розовый для акцента */
+    color: #444;
+}
+
+.garden-text {
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.garden-date {
+    font-size: 12px;
+    text-align: right;
+    opacity: 0.6;
+}
+
+.garden-card h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 5px;
+}
+
+.garden-card ul {
+    list-style: none;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.photo-note img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+/* АДАПТАЦИЯ ДЛЯ ТЕЛЕФОНОВ (Экран меньше 768px) */
+@media (max-width: 768px) {
+    
+    /* 1. Меню делаем в колонку или разрешаем перенос */
+    .nav-menu {
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    /* 2. Сетка превращается в одну колонку */
+    .content-grid {
+        grid-template-columns: 1fr; /* Всё встает друг под друга */
+        gap: 40px;
+        padding: 10px;
+    }
+
+    /* 3. Фотографии делаем по центру и чуть меньше */
+    .photo-col {
+        height: 400px; /* Уменьшаем высоту зоны фото */
+        display: flex;
+        justify-content: center;
+    }
+
+    .card {
+        width: 220px; /* На мобильном 280px может быть много */
+        height: 300px;
+    }
+
+    .p2 {
+        left: 60px; /* Сдвигаем второе фото ближе, чтобы не вылетало за экран */
+    }
+
+    /* 4. Шапка: имя и город друг под другом */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+    /* 5. Конверт на весь экран */
+    .envelope {
+        width: 100%;
+    }
+
+    /* 6. Страница Music и Photography тоже в одну колонку */
+    .music-container, .photography-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .record-circle {
+        width: 250px; /* Пластинка поменьше на мобильном */
+        height: 250px;
+    }
+}
+/* Временно убери cursor: none, чтобы видеть, работает ли точка вообще */
+/* * { cursor: none !important; } */
+
+/* 1. Полностью убираем стандартную стрелку */
+* {
+    cursor: none !important;
+}
+
+/* 2. Общие стили для кастомного курсора */
+.cursor, .cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    /* Плавное возвращение размера при уходе с кнопок */
+    transition: transform 0.2s ease, background-color 0.2s ease, opacity 0.3s ease;
+}
+
+/* 3. Маленькая яркая точка */
+.cursor {
+    width: 8px;
+    height: 8px;
+    background-color: #ff2d55; /* Сочный розовый */
+    box-shadow: 0 0 12px #ff2d55; /* Эффект неонового свечения */
+}
+
+/* 4. Шлейф (кольцо), которое следует за точкой */
+.cursor-follower {
+    width: 25px;
+    height: 25px;
+    background-color: rgba(255, 45, 85, 0.2); /* Прозрачный розовый */
+    border: 1px solid rgba(255, 45, 85, 0.5);
+    /* Задержка движения для мягкости (настраивается в JS, но тут задаем плавность) */
+    transition: left 0.12s ease-out, top 0.12s ease-out, transform 0.3s ease;
+}
+/* Стили для страницы 404 */
+.error-page {
+    background-color: #fce4ec; /* Нежно-розовый фон */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.error-container {
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.error-title {
+    font-size: 150px;
+    font-weight: 100;
+    color: #ff2d55; /* Твой яркий розовый цвет */
+    margin: 0;
+    letter-spacing: 20px;
+    opacity: 0.6;
+}
+
+.error-text {
+    font-family: 'Playfair Display', serif; /* Или любой красивый шрифт */
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid #ff2d55;
+    color: #ff2d55;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+    background-color: #ff2d55;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 45, 85, 0.4);
+}
+
+/* Плавное появление контента */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

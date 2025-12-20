@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Lost in Paris</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="error-page">
+
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <div class="error-container">
+        <h1 class="error-title">404</h1>
+        <p class="error-text">Oops! This melody seems to be lost in the streets of Paris...</p>
+        <a href="index.html" class="btn-back">Return to Harmony</a>
+    </div>
+
+    <script>
+        // Код для курсора (тот же, что и на других страницах)
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        });
+    </script>
+</body>
+</html>

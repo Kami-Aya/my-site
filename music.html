@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music | Gauhar Rustemkyzy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="nav-menu">
+        <a href="index.html">about me</a>
+        <a href="digital_garden.html">digital garden</a>
+        <a href="music.html" style="text-decoration: underline; opacity: 1;">music</a>
+        <a href="multimedia.html">multimedia</a>
+        <a href="photography.html">photography</a>
+    </nav>
+
+    <header class="header">
+        <h1 class="main-name">AUDIO REPERTOIRE</h1>
+        <div class="city">Paris Sessions</div>
+    </header>
+
+    <main class="music-container">
+        
+        <div class="playlist-section">
+            <div class="track-item">
+                <div class="track-info">
+                    <span class="track-no">01</span>
+                    <div>
+                        <p class="track-title">La Vie En Rose</p>
+                        <p class="track-sub">Jazz / Soul Cover</p>
+                    </div>
+                </div>
+                <audio controls>
+                    <source src="track1.mp3" type="audio/mpeg">
+                    Ваш браузер не поддерживает аудио.
+                </audio>
+            </div>
+
+            <div class="track-item">
+                <div class="track-info">
+                    <span class="track-no">02</span>
+                    <div>
+                        <p class="track-title">Fly Me To The Moon</p>
+                        <p class="track-sub">Classic Jazz / Piano</p>
+                    </div>
+                </div>
+                <audio controls>
+                    <source src="track2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="track-item">
+                <div class="track-info">
+                    <span class="track-no">03</span>
+                    <div>
+                        <p class="track-title">Killing Me Softly</p>
+                        <p class="track-sub">Neo-Soul Performance</p>
+                    </div>
+                </div>
+                <audio controls>
+                    <source src="track3.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <div class="music-visual">
+            <div class="record-circle">
+                <div class="record-label">GAUHAR</div>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<script>
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    // Проверка: выведет сообщение в консоль браузера (F12), если блоки найдены
+    if(cursor && follower) {
+        console.log("Курсор найден и готов к работе!");
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        // Используем прямое изменение стилей через координаты
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Шлейф будет следовать за основной точкой
+        follower.style.left = e.clientX + 'px';
+        follower.style.top = e.clientY + 'px';
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gauhar Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="nav-menu">
+    <a href="index.html">about me</a>
+    <a href="digital_garden.html">digital garden</a>
+    <a href="music.html">music</a>
+    <a href="multimedia.html">multimedia</a>
+    <a href="photography.html">photography</a>
+  </nav>
+
+    <header class="header">
+        <h1 class="main-name">GAUHAR RUSTEMKYZY <span>[SISA]</span></h1>
+        <div class="city">Paris, France</div>
+    </header>
+
+    <main class="content-grid">
+        <div class="photo-col">
+            <div class="card p1"><img src="img/photo1.JPG" alt="1"></div>
+            <div class="card p2"><img src="img/photo2.JPG" alt="2"></div>
+        </div>
+
+        <div class="text-col">
+            <div class="prof-info">
+                chanteuse, interpretrice
+                <ul>
+                    <li>• solo</li>
+                    <li>• avec l’accompagnement de piano</li>
+                </ul>
+            </div>
+            <p class="bio">Je suis une chanteuse avec une expérience professionnelle de 5 ans, passionnée par le monde créatif : arts visuels, design, mode, musique, danse et théâtre.</p>
+        </div>
+
+        <div class="env-col">
+            <div class="envelope">
+                <div class="env-label">[genres et styles:]</div>
+                <div class="flap"></div> <div class="genre-grid">
+                    <span>soul</span><span>jazz</span>
+                    <span>pop</span><span>r&b</span>
+                    <span class="long">neo-soul</span><span>ballads</span>
+                </div>
+                <div class="lover-sign">Lover</div>
+            </div>
+        </div>
+    </main>
+<div class="social-link">
+    <a href="https://www.instagram.com/imgauhara/" target="_blank">@imgauhara</a>
+</div>
+
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<script>
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    // Проверка: выведет сообщение в консоль браузера (F12), если блоки найдены
+    if(cursor && follower) {
+        console.log("Курсор найден и готов к работе!");
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        // Используем прямое изменение стилей через координаты
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        
+        // Шлейф будет следовать за основной точкой
+        follower.style.left = e.clientX + 'px';
+        follower.style.top = e.clientY + 'px';
+    });
+</script>
+
+</body>
+</html>
