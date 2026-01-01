@@ -562,15 +562,15 @@ audio {
 
 }
 
-/* Стили для новогодних снежинок */
+/* Стили для снега */
 .snowflake {
     position: fixed;
     top: -10px;
-    color: #fff;
+    color: #fff; /* Основной цвет — белый */
     font-family: Arial, sans-serif;
     text-shadow: 0 0 5px rgba(255,255,255,0.8);
     user-select: none;
     z-index: 1000;
     pointer-events: none;
-    transition: top 5s linear, left 5s ease-in-out; /* Плавность падения */
 }
+
