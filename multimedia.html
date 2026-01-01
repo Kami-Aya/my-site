@@ -24,7 +24,7 @@
     <main class="multimedia-container">
         <div class="video-card">
             <div class="video-placeholder">
-                <video loop muted onmouseover="this.play()" onmouseout="this.pause()">
+                <video loop muted autoplay playsinline preload="auto" onmouseover="this.play()" onmouseout="this.pause()">
                     <source src="img/liveparis.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">Live in Paris</div>
@@ -33,7 +33,7 @@
 
         <div class="video-card">
             <div class="video-placeholder">
-                <video loop muted onmouseover="this.play()" onmouseout="this.pause()">
+                <video loop muted autoplay playsinline preload="auto" onmouseover="this.play()" onmouseout="this.pause()">
                     <source src="img/studio.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">Studio Session</div>
@@ -42,7 +42,7 @@
 
         <div class="video-card">
             <div class="video-placeholder">
-                <video loop muted onmouseover="this.play()" onmouseout="this.pause()">
+                <video loop muted autoplay playsinline preload="auto" onmouseover="this.play()" onmouseout="this.pause()">
                     <source src="img/video7.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">Backstage</div>
@@ -51,7 +51,7 @@
 
         <div class="video-card">
             <div class="video-placeholder">
-                <video loop muted onmouseover="this.play()" onmouseout="this.pause()">
+                <video loop muted autoplay playsinline preload="auto" onmouseover="this.play()" onmouseout="this.pause()">
                     <source src="img/video1.mp4" type="video/mp4">
                 </video>
                 <div class="video-overlay">Acoustic</div>
@@ -60,26 +60,23 @@
     </main>
 
     <div class="cursor"></div>
-<div class="cursor-follower"></div>
+    <div class="cursor-follower"></div>
 
-<script>
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
+    <script>
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
 
-    // Проверка: выведет сообщение в консоль браузера (F12), если блоки найдены
-    if(cursor && follower) {
-        console.log("Курсор найден и готов к работе!");
-    }
+        if(cursor && follower) {
+            console.log("Курсор найден и готов к работе!");
+        }
 
-    document.addEventListener('mousemove', (e) => {
-        // Используем прямое изменение стилей через координаты
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        // Шлейф будет следовать за основной точкой
-        follower.style.left = e.clientX + 'px';
-        follower.style.top = e.clientY + 'px';
-    });
-</script>
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        });
+    </script>
 </body>
 </html>
