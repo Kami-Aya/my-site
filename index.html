@@ -60,48 +60,62 @@
     <div class="cursor-follower"></div>
 
     <script>
-        // --- СКРИПТ ДЛЯ СНЕЖИНОК ---
-        function createSnowflake() {
-            const snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            
-            const flakes = ['❅', '❄', '✻', '❇', '✨'];
-            snowflake.innerHTML = flakes[Math.floor(Math.random() * flakes.length)];
-            
-            const startX = Math.random() * window.innerWidth;
-            const size = (Math.random() * 10 + 10) + 'px';
-            const duration = (Math.random() * 5 + 5); // Секунды падения
-            const opacity = Math.random() * 0.7 + 0.3;
+    function createSnowflake() {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        
+        // Только чистые символы: снежинки и искра
+        const flakes = ['❅', '❄', '✻', '❇', '✨'];
+        const currentFlake = flakes[Math.floor(Math.random() * flakes.length)];
+        snowflake.innerHTML = currentFlake;
+        
+        const startX = Math.random() * window.innerWidth;
+        const size = (Math.random() * 12 + 10) + 'px'; // Размер от 10 до 22 пикселей
+        const duration = (Math.random() * 5 + 5); 
+        const opacity = Math.random() * 0.7 + 0.3;
 
-            snowflake.style.left = startX + 'px';
-            snowflake.style.fontSize = size;
-            snowflake.style.opacity = opacity;
-            snowflake.style.transition = `top ${duration}s linear, left ${duration}s ease-in-out`;
+        snowflake.style.left = startX + 'px';
+        snowflake.style.fontSize = size;
+        snowflake.style.opacity = opacity;
+        snowflake.style.position = 'fixed'; 
+        snowflake.style.top = '-20px';
 
-            document.body.appendChild(snowflake);
-
-            setTimeout(() => {
-                snowflake.style.top = (window.innerHeight + 20) + 'px';
-                snowflake.style.left = (startX + (Math.random() * 100 - 50)) + 'px';
-            }, 100);
-
-            setTimeout(() => {
-                snowflake.remove();
-            }, duration * 1000);
+        // Если это искорка ✨, делаем её золотистой, остальные — белые
+        if (currentFlake === '✨') {
+            snowflake.style.color = '#FFD700'; 
+        } else {
+            snowflake.style.color = '#FFFFFF';
         }
 
-        setInterval(createSnowflake, 300);
+        snowflake.style.transition = `top ${duration}s linear, left ${duration}s ease-in-out`;
 
-        // --- ТВОЙ КОД ДЛЯ КУРСОРA ---
-        const cursor = document.querySelector('.cursor');
-        const follower = document.querySelector('.cursor-follower');
+        document.body.appendChild(snowflake);
 
-        document.addEventListener('mousemove', (e) => {
+        setTimeout(() => {
+            snowflake.style.top = (window.innerHeight + 20) + 'px';
+            snowflake.style.left = (startX + (Math.random() * 100 - 50)) + 'px';
+        }, 100);
+
+        setTimeout(() => {
+            snowflake.remove();
+        }, duration * 1000);
+    }
+
+    // Запуск создания снежинок
+    setInterval(createSnowflake, 300);
+
+    // Твой старый код для курсора (оставь его ниже)
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+
+    document.addEventListener('mousemove', (e) => {
+        if(cursor && follower) {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
             follower.style.left = e.clientX + 'px';
             follower.style.top = e.clientY + 'px';
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>
