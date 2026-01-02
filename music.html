@@ -77,22 +77,57 @@
 <div class="cursor-follower"></div>
 
 <script>
+    const allAudios = document.querySelectorAll('audio');
+    const record = document.querySelector('.record-circle');
+
+    allAudios.forEach(audio => {
+        audio.addEventListener('play', () => {
+            let isNewTrack = false;
+
+            allAudios.forEach(otherAudio => {
+                if (otherAudio !== audio && !otherAudio.paused) {
+                    isNewTrack = true; // Если другой трек уже играл — значит это переключение
+                    otherAudio.pause();
+                    otherAudio.currentTime = 0;
+                }
+            });
+
+            if (isNewTrack) {
+                // Сброс анимации в начало при новой песне
+                record.classList.remove('playing');
+                record.classList.add('reset-animation');
+                setTimeout(() => {
+                    record.classList.remove('reset-animation');
+                    record.classList.add('playing');
+                }, 10);
+            } else {
+                // Просто продолжаем крутить с того же места
+                record.classList.add('playing');
+            }
+        });
+
+        audio.addEventListener('pause', () => {
+            const isAnyPlaying = Array.from(allAudios).some(a => !a.paused);
+            if (!isAnyPlaying) {
+                record.classList.remove('playing'); // Замирает на месте
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            record.classList.remove('playing');
+        });
+    });
+
+    // Твой курсор
     const cursor = document.querySelector('.cursor');
     const follower = document.querySelector('.cursor-follower');
-
-    // Проверка: выведет сообщение в консоль браузера (F12), если блоки найдены
-    if(cursor && follower) {
-        console.log("Курсор найден и готов к работе!");
-    }
-
     document.addEventListener('mousemove', (e) => {
-        // Используем прямое изменение стилей через координаты
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        // Шлейф будет следовать за основной точкой
-        follower.style.left = e.clientX + 'px';
-        follower.style.top = e.clientY + 'px';
+        if(cursor && follower) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX + 'px';
+            follower.style.top = e.clientY + 'px';
+        }
     });
 </script>
 </body>
