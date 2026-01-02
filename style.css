@@ -203,6 +203,7 @@ audio {
     justify-content: center;
 }
 
+/* Твой оригинальный дизайн пластинки */
 .record-circle {
     width: 350px;
     height: 350px;
@@ -214,9 +215,28 @@ audio {
     justify-content: center;
     position: relative;
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    animation: rotateRecord 10s linear infinite; /* Пластинка крутится! */
+    
+    /* Анимация включена по умолчанию, но стоит на паузе */
+    animation: rotateRecord 10s linear infinite;
+    animation-play-state: paused; 
 }
 
+/* Когда музыка играет — запускаем */
+.record-circle.playing {
+    animation-play-state: running;
+}
+
+/* Служебный класс для сброса в начало */
+.reset-animation {
+    animation: none !important;
+}
+
+@keyframes rotateRecord {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Твоя розовая этикетка в центре */
 .record-label {
     width: 100px;
     height: 100px;
@@ -231,10 +251,6 @@ audio {
     border: 2px solid #fff;
 }
 
-@keyframes rotateRecord {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
 /* СТИЛИ ДЛЯ PHOTOGRAPHY.HTML */
 .photography-grid {
     display: grid;
@@ -494,6 +510,7 @@ audio {
     height: 8px;
     background-color: #ff2d55; /* Сочный розовый */
     box-shadow: 0 0 12px #ff2d55; /* Эффект неонового свечения */
+    pointer-events: none;
 }
 
 /* 4. Шлейф (кольцо), которое следует за точкой */
@@ -559,7 +576,6 @@ audio {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
-
 }
 
 /* Стили для снега */
@@ -573,4 +589,3 @@ audio {
     z-index: 1000;
     pointer-events: none;
 }
-
