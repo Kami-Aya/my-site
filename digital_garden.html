@@ -22,23 +22,22 @@
     </header>
 
     <main class="garden-container">
-        
-    <div class="garden-card note">
-        <p class="garden-text" id="daily-quote">"Загрузка вдохновения..."</p>
-        <span class="garden-date" id="current-date"></span>
-    </div>
+        <div class="garden-card note">
+            <p class="garden-text">"Каждое выступление — это новая история, рассказанная душой."</p>
+            <span class="garden-date">03.01.2026</span>
+        </div>
 
         <div class="garden-card">
-            <h3>Current Inspiration</h3>
+            <h3>CURRENT INSPIRATION</h3>
             <p>Parisian jazz cellars, the smell of vintage vinyl, and the way light hits the Seine at 6 PM.</p>
         </div>
 
         <div class="garden-card playlist-mini">
-            <h3>Mood of the month</h3>
+            <h3>MOOD OF THE MONTH</h3>
             <ul>
-                <li>• Sade - Smooth Operator</li>
-                <li>• Edith Piaf - Hymne à l'amour</li>
-                <li>• Erykah Badu - Rimshot</li>
+                <li>• Sade – Smooth Operator</li>
+                <li>• Edith Piaf – Hymne à l'amour</li>
+                <li>• Erykah Badu – Rimshot</li>
             </ul>
         </div>
 
@@ -47,60 +46,121 @@
             <p>Details in the streets.</p>
         </div>
 
+        <div id="dynamic-cards" style="display: contents;"></div>
     </main>
-<script>
-    // 1. Установка даты
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
-    document.getElementById('current-date').innerText = day + '.' + month + '.' + year;
 
-    // 2. Список цитат (можешь добавлять свои сколько угодно)
-    const quotes = [
-        "L'art est la seule chose qui rend la vie plus intéressante que l'art.",
-        "Music is the divine way to tell beautiful, poetic things to the heart.",
-        "La vie est une fleur dont l'amour est le miel.",
-        "Каждое выступление — это новая история, рассказанная душой.",
-        "Paris est une fête — Париж это праздник, который всегда с тобой.",
-        "Art is not what you see, but what you make others see.",
-        "В музыке нет границ, только чувства."
-    ];
+    <div id="garden-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-date" class="garden-date"></div>
+            <h2 id="modal-title" style="margin-top:20px; font-family: inherit;"></h2>
+            <hr style="border:0; border-top:1px solid #eee; margin:15px 0;">
+            <div id="modal-body" class="garden-text-full" style="white-space:pre-wrap;"></div>
+            <div id="modal-tag" class="garden-tag" style="margin-top:20px; color:#e8a7ad; font-weight: bold;"></div>
+        </div>
+    </div>
 
-    // 3. Логика смены цитаты раз в сутки
-    // Используем индекс дня года, чтобы цитата менялась только когда наступает новый день
-    const start = new Date(today.getFullYear(), 0, 0);
-    const diff = today - start;
-    const oneDay = 1000 * 60 * 60 * 24;
-    const dayOfYear = Math.floor(diff / oneDay);
-
-    // Выбираем цитату из списка по номеру дня
-    const quoteIndex = dayOfYear % quotes.length;
-    document.getElementById('daily-quote').innerText = '"' + quotes[quoteIndex] + '"';
-</script>
-
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
 
 <script>
-    const cursor = document.querySelector('.cursor');
-    const follower = document.querySelector('.cursor-follower');
+    const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTKkbS1XiHScW-TatqJqcxl8TptJ8fAnbeepQSemxnstIlKxAGb3_2yOQ6akJEo3VQ2Ewi1o0UWCHEN/pub?output=csv';
 
-    // Проверка: выведет сообщение в консоль браузера (F12), если блоки найдены
-    if(cursor && follower) {
-        console.log("Курсор найден и готов к работе!");
+    // Функция для разбора CSV (теперь настроена на 4 колонки)
+    function parseCSV(text) {
+        const result = [];
+        let row = [];
+        let cell = '';
+        let inQuotes = false;
+
+        for (let i = 0; i < text.length; i++) {
+            let char = text[i];
+            let nextChar = text[i+1];
+
+            if (char === '"' && inQuotes && nextChar === '"') {
+                cell += '"'; i++;
+            } else if (char === '"') {
+                inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+                row.push(cell); cell = '';
+            } else if ((char === '\r' || char === '\n') && !inQuotes) {
+                if (cell !== '' || row.length > 0) {
+                    row.push(cell); result.push(row);
+                }
+                row = []; cell = '';
+                if (char === '\r' && nextChar === '\n') i++;
+            } else {
+                cell += char;
+            }
+        }
+        if (cell !== '' || row.length > 0) {
+            row.push(cell); result.push(row);
+        }
+        return result;
     }
 
-    document.addEventListener('mousemove', (e) => {
-        // Используем прямое изменение стилей через координаты
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        // Шлейф будет следовать за основной точкой
-        follower.style.left = e.clientX + 'px';
-        follower.style.top = e.clientY + 'px';
-    });
-</script>
+    async function loadGarden() {
+        try {
+            const response = await fetch(tableUrl);
+            const csvData = await response.text();
+            const allRows = parseCSV(csvData).slice(1); // Пропускаем шапку
+            const container = document.getElementById('dynamic-cards');
 
+            allRows.forEach(cols => {
+                // Теперь нам достаточно хотя бы 2-3 колонок (дата и текст)
+                if (cols.length < 2) return;
+
+                const date = cols[0] ? cols[0].trim() : '';
+                const title = cols[1] ? cols[1].trim() : '';
+                const text = cols[2] ? cols[2].trim() : '';
+                const tag = cols[3] ? cols[3].trim() : '';
+                
+                // ТАК КАК ТИП УБРАЛИ: принудительно ставим 'note' для всех
+                const type = 'note';
+
+                const card = document.createElement('div');
+                card.className = `garden-card ${type}`;
+                card.style.cursor = 'pointer';
+                
+                card.innerHTML = `
+                    <div class="garden-date">${date}</div>
+                    ${title ? `<h3>${title}</h3>` : ''}
+                    <p class="garden-text">${text.substring(0, 80)}${text.length > 80 ? '...' : ''}</p>
+                    <div class="garden-tag">${tag}</div>
+                `;
+
+                card.onclick = () => {
+                    document.getElementById('modal-date').innerText = date;
+                    document.getElementById('modal-title').innerText = title;
+                    document.getElementById('modal-body').innerText = text;
+                    document.getElementById('modal-tag').innerText = tag;
+                    document.getElementById('garden-modal').style.display = "block";
+                };
+                
+                container.appendChild(card);
+            });
+        } catch (e) {
+            console.error("Ошибка загрузки:", e);
+        }
+    }
+
+    // Закрытие модального окна
+    const modal = document.getElementById('garden-modal');
+    document.querySelector('.close-modal').onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; };
+
+    // Курсор
+    const cursor = document.querySelector('.cursor');
+    const follower = document.querySelector('.cursor-follower');
+    document.addEventListener('mousemove', (e) => {
+        if(cursor && follower) {
+            cursor.style.left = e.clientX + 'px'; cursor.style.top = e.clientY + 'px';
+            follower.style.left = e.clientX + 'px'; follower.style.top = e.clientY + 'px';
+        }
+    });
+
+    loadGarden();
+</script>
+<div id="modal-body" class="garden-text-full" style="white-space: pre-wrap; padding-bottom: 20px;"></div>
 </body>
 </html>
