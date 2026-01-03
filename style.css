@@ -11,47 +11,15 @@ body {
 .nav-menu {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Немного уменьшил расстояние, чтобы влезло в панель */
-    margin: 20px auto;
-    padding: 10px 25px;
-    
-    /* Делаем плавающую панель */
-    background: rgba(176, 21, 101, 0.551); /* Прозрачный белый */
-    backdrop-filter: blur(10px); /* Эффект матового стекла */
-    -webkit-backdrop-filter: blur(10px);
-    
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50px; /* Скругленные края как у капсулы */
-    width: fit-content; /* Ширина по контенту */
-    position: sticky; /* Меню будет «залипать» при скролле */
-    top: 20px;
-    z-index: 1000;
-    box-shadow: 0 8px 32px rgba(232, 167, 173, 0.2);
+    gap: 30px;
+    margin-bottom: 20px;
 }
 
 .nav-menu a {
     color: #fff;
     text-decoration: none;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 8px 15px;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    opacity: 0.9;
-}
-
-/* Эффект при наведении */
-.nav-menu a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    opacity: 1;
-}
-
-/* Стиль для активной страницы */
-.nav-menu a.active {
-    background: #fff;
-    color: #e8a7ad; /* Цвет твоего фона/карточек */
-    font-weight: bold;
+    font-size: 15px;
+    opacity: 0.8;
 }
 
 /* ШАПКА */
@@ -404,7 +372,7 @@ audio {
 }
 
 .garden-card {
-    background: rgba(11, 25, 157, 0.485);
+    background: rgba(255, 255, 255, 0.15);
     border: 1px dashed rgba(255, 255, 255, 0.4);
     padding: 25px;
     width: 300px;
@@ -668,5 +636,6 @@ audio {
 #modal-body {
     padding-bottom: 30px; /* Отступ внизу текста */
 }
+
 
 
