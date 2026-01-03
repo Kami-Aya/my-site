@@ -603,27 +603,36 @@ audio {
     backdrop-filter: blur(5px); /* Размытие заднего плана */
 }
 
+/* Модальное окно с прокруткой */
 .modal-content {
     background-color: #fff;
     color: #333;
-    margin: 5% auto; /* Чуть меньше отступ сверху, чтобы влезло больше текста */
+    margin: 5% auto;
     padding: 40px;
     width: 90%;
     max-width: 600px;
-    max-height: 80vh; /* Окно не будет больше 80% высоты экрана */
+    max-height: 85vh; /* Ограничиваем высоту окна */
     border-radius: 2px;
     position: relative;
     box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-    
-    /* Самая важная часть — разрешаем внутреннюю прокрутку */
-    overflow-y: auto; 
+    overflow-y: auto; /* Включаем прокрутку */
 }
 
-/* Настроим красивый скроллбар (опционально, для эстетики) */
+/* Красивый скроллбар для окна */
 .modal-content::-webkit-scrollbar {
     width: 6px;
 }
 .modal-content::-webkit-scrollbar-thumb {
-    background-color: #e8a7ad; /* Твой розовый цвет */
+    background-color: #e8a7ad;
     border-radius: 10px;
+}
+
+/* Исправление для длинных ссылок и тегов */
+.garden-tag, .garden-text, .garden-text-full {
+    word-break: break-all; /* Разрывает длинные ссылки */
+    overflow-wrap: break-word;
+}
+
+#modal-body {
+    padding-bottom: 30px; /* Отступ внизу текста */
 }
