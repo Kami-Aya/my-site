@@ -372,7 +372,7 @@ audio {
 }
 
 .garden-card {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(11, 25, 157, 0.485);
     border: 1px dashed rgba(255, 255, 255, 0.4);
     padding: 25px;
     width: 300px;
@@ -636,3 +636,4 @@ audio {
 #modal-body {
     padding-bottom: 30px; /* Отступ внизу текста */
 }
+
